@@ -35,15 +35,14 @@ public class CustomerController {
     }
 
     @PutMapping({"/{customerId}"})
-    public ResponseEntity handleUpdate(@PathVariable("customerId") UUID customerId, @RequestBody CustomerDto customerDto) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void handleUpdate(@PathVariable("customerId") UUID customerId, @RequestBody CustomerDto customerDto) {
         customerService.updateCustomer(customerId, customerDto);
-
-        return new ResponseEntity((HttpStatus.NO_CONTENT));
     }
 
-    @DeleteMapping
+    @DeleteMapping({"/{customerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable("/{customerId}") UUID customerId) {
+    public void deleteById(@PathVariable("customerId") UUID customerId) {
         customerService.deleteById(customerId);
 
     }
